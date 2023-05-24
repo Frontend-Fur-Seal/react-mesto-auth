@@ -1,0 +1,26 @@
+.profile__button-add-place{
+    width: 150px;
+    height: 50px;
+    background: #000 url(../../../images/add-place.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 22px 22px;
+    border: 2px solid #fff;
+    padding: 0;
+    align-self: center;
+    box-sizing: border-box;
+}
+
+.profile__button-add-place:hover{
+    cursor: pointer;
+    opacity: .6;
+}
+
+@media screen and (max-width: 930px) {
+    .profile__button-add-place{
+        justify-self: center;
+        width: 100%;
+        background-size: 16px 16px;
+    }
+}
+

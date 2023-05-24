@@ -1,0 +1,29 @@
+.profile__button-name-change{
+    width: 24px;
+    height: 24px;
+    line-height: 48px;
+    background: #000 url(../../../images/change-name.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+    border: 1px solid #fff;
+    padding: 0;
+    box-sizing: border-box;
+    grid-area: change-button;
+    gap: 30px;
+}
+
+.profile__button-name-change:hover{
+    cursor: pointer;
+    opacity: .6;
+}
+
+@media screen and (max-width: 930px) {
+    .profile__button-name-change{
+      width: 18px;
+      height: 18px;
+      position: absolute;
+      right: -28px;
+      top: 9px;
+    }
+}
+

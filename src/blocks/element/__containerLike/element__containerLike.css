@@ -1,0 +1,6 @@
+.element__containerLike{
+    display: flex;
+    flex-direction: column;
+    margin-left: 10px;
+    gap: 3px;
+}

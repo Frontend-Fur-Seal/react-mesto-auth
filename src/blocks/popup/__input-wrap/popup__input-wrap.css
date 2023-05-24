@@ -1,0 +1,19 @@
+.popup__input-wrap{
+    display: flex;
+    flex-direction: column;
+    
+}
+
+.popup__input-wrap:first-of-type{
+    min-height: 60px;
+}
+
+.popup__input-wrap:last-of-type{
+    min-height: 73px;
+}
+
+@media screen and (max-width: 720px) {
+    .popup__input-wrap:last-of-type{
+        min-height: 69px;
+}
+}

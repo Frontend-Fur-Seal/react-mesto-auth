@@ -1,0 +1,11 @@
+.popup__content{
+    font-size: 14px;
+    line-height: 17px;
+    border: none;
+    border-bottom: 1px solid rgba(0, 0, 0, .2);
+    outline: 0;
+    min-height: 27px;
+    padding: 0 0 5px;
+    box-sizing: border-box;
+    }
+

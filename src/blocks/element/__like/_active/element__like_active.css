@@ -1,0 +1,10 @@
+.element__like_active{
+    padding: 0;
+    min-width: 22px;
+    min-height: 19px;
+    background: #fff url(../../../../images/heart-checkbox_active.svg);
+    background-size: contain;
+    background-repeat: no-repeat;
+    cursor: pointer;
+    border: none;
+}

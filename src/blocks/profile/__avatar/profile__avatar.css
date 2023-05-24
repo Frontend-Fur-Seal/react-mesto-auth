@@ -1,0 +1,12 @@
+.profile__avatar{
+    position: absolute;
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    z-index: 100;
+}
+
+.profile__avatar:hover{
+    z-index: 5;
+}

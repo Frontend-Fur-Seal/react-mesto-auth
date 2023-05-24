@@ -1,0 +1,25 @@
+.profile__info{
+    display: grid;
+    grid-template-areas: 
+    "title change-button"
+    "occupation .";
+    grid-template-columns: max-content 1fr;
+    row-gap: 16px;
+    column-gap: 18px;
+    align-content: center;
+    align-items: baseline;
+    flex-grow: 1;
+    position: relative;
+}
+
+@media screen and (max-width: 930px) {
+    .profile__info{
+        grid-template-columns: max-content;
+        grid-template-areas: 
+        "title"
+        "occupation";
+        justify-items: center;
+        row-gap: 4px;
+        margin: 26px auto 36px;
+    }
+}
