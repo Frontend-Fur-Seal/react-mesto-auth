@@ -1,0 +1,15 @@
+.login__input{
+    min-width: 358px;
+    border: none;
+    background-color: #000;
+    vertical-align: middle;
+    min-height: 27px;
+    font-size: 14px;
+    border-bottom: 2px solid rgba(204, 204, 204, 1);
+    color: rgba(204, 204, 204, 1);
+}
+
+.login__input:focus{
+    outline: 0;
+    outline-offset: 0;
+}

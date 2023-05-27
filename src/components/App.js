@@ -14,7 +14,7 @@ import SignIn from "./SignIn.js";
 
 const App = () => {
 
-  const [loggedIn, setLoggedIn] = useState(true);
+  const [loggedIn, setLoggedIn] = useState(false);
 
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
   const [isEditAddPlacePopupOpen, setIsEditAddPlacePopupOpen] = useState(false);

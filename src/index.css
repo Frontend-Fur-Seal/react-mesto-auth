@@ -12,6 +12,10 @@
 @import url(./blocks/profile/__name/profile__name.css);
 @import url(./blocks/profile/__occupation/profile__occupation.css);
 @import url(./blocks/profile/__info/profile__info.css);
+@import url(./blocks/login/login.css);
+@import url(./blocks/login/__welcome/login__welcome.css);
+@import url(./blocks/login/__form/login__form.css);
+@import url(./blocks/login/__input/login__input.css);
 @import url(./blocks/popup/popup.css);
 @import url(./blocks/popup/_full-img/popup_full-img.css);
 @import url(./blocks/popup/__container/popup__container.css);
