@@ -3,13 +3,19 @@ import Main from "./Main.js";
 import Footer from "./Footer.js";
 import ImagePopup from "./ImagePopup.js";
 import { useState, useEffect } from "react";
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import api from "../utils/Api.js";
 import CurrentUserContext from "../contexts/CurrentUserContext.js";
 import EditProfilePopup from "./EditProfilePopup.js";
 import AddPlacePopup from "./AddPlacePopup.js";
 import EditAvatarPopup from "./EditAvatarPopup.js";
+import ProtectedRouteElement from './ProtectedRoute.js';
+import SignIn from "./SignIn.js";
 
 const App = () => {
+
+  const [loggedIn, setLoggedIn] = useState(true);
+
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
   const [isEditAddPlacePopupOpen, setIsEditAddPlacePopupOpen] = useState(false);
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
@@ -113,18 +119,25 @@ const App = () => {
   }
 
   return (
+  <BrowserRouter>
     <CurrentUserContext.Provider value={currentUser}>
       <div className="App">
         <Header />
-        <Main
-          onEditAvatar={handleEditAvatarClick}
-          onAddPlace={handleAddPlaceClick}
-          onEditProfile={handleEditProfileClick}
-          onCardClick={handleCardClick}
-          onCardLike={handleCardLike}
-          onCardDelete={handleCardDelete}
-          cards={cards}
-        />
+        <Routes>
+          <Route path="/" element={loggedIn ? <Navigate to="/main" replace /> : <Navigate to="/sign-in" replace />} />
+          <Route path="/sign-in" element={<SignIn />} />
+          <Route path="/main" element={<ProtectedRouteElement 
+            element={Main} 
+            loggedIn={loggedIn}
+            onEditAvatar={handleEditAvatarClick}
+            onAddPlace={handleAddPlaceClick}
+            onEditProfile={handleEditProfileClick}
+            onCardClick={handleCardClick}
+            onCardLike={handleCardLike}
+            onCardDelete={handleCardDelete}
+            cards={cards}         
+            />} />
+        </Routes>
         <Footer />
         <EditProfilePopup
           isOpen={isEditProfilePopupOpen}
@@ -144,6 +157,7 @@ const App = () => {
         <ImagePopup card={SelectedCard} onClose={closeAllPopups} />
       </div>
     </CurrentUserContext.Provider>
+  </BrowserRouter>
   );
 };
 
