@@ -14,3 +14,18 @@ export const register = (email, password) => {
   })
   .catch((err) => console.log(err));
 };
+
+export const authorize = (email, password) => {
+  return fetch(`${BASE_URL}/signin`, {
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({email, password})
+  })
+  .then((res) => {
+    return res.json();
+  })
+  .catch((err) => console.log(err));
+};

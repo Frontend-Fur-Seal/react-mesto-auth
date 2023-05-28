@@ -3,7 +3,7 @@ import Main from "./Main.js";
 import Footer from "./Footer.js";
 import ImagePopup from "./ImagePopup.js";
 import { useState, useEffect } from "react";
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 import api from "../utils/Api.js";
 import CurrentUserContext from "../contexts/CurrentUserContext.js";
 import EditProfilePopup from "./EditProfilePopup.js";
@@ -15,7 +15,13 @@ import Register from "./Register.js";
 
 const App = () => {
 
-  const [loggedIn, setLoggedIn] = useState(true);
+  const [loggedIn, setLoggedIn] = useState(false);
+  const [userData, setUserData] = useState(null);
+
+  const handleLogin = (user) => {
+    setLoggedIn(true);  
+    setUserData(user);
+  }
 
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
   const [isEditAddPlacePopupOpen, setIsEditAddPlacePopupOpen] = useState(false);
@@ -123,9 +129,8 @@ const App = () => {
   <BrowserRouter>
     <CurrentUserContext.Provider value={currentUser}>
       <div className="App">
-        <Header />
         <Routes>
-          <Route path="/sign-in" element={<Login />} />
+          <Route path="/sign-in" element={<Login handleLogin={handleLogin} userData={userData} />} />
           <Route path="/sign-up" element={<Register />} />
           <Route path="/" element={<ProtectedRouteElement 
             element={Main} 
@@ -136,7 +141,8 @@ const App = () => {
             onCardClick={handleCardClick}
             onCardLike={handleCardLike}
             onCardDelete={handleCardDelete}
-            cards={cards}         
+            cards={cards}  
+            userData={userData}       
             />} />
           <Route path="*" element={<Login />} />
         </Routes>

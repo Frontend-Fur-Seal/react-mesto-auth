@@ -2,11 +2,18 @@ import React from "react";
 import CurrentUserContext from "../contexts/CurrentUserContext.js";
 import hoverAvatar from "../images/Avatar.svg";
 import Card from "./Card.js";
+import { Link } from 'react-router-dom';
+import Header from './Header.js';
 
 function Main(props) {
   const currentUser = React.useContext(CurrentUserContext);
 
   return (
+    <>
+    <Header>
+          <p>{props.userData}</p>
+          <Link to="/sign-in" className="login__login-link">Выйти</Link>
+    </Header>
     <main className="content">
       <section className="profile">
         <div className="profile__avatar-container" onClick={props.onEditAvatar}>
@@ -48,6 +55,7 @@ function Main(props) {
         ))}
       </section>
     </main>
+    </>
   );
 }
 

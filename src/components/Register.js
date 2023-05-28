@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
-import {Link, useNavigate} from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import Header from './Header.js';
 import * as auth from './Auth.js';
 
 function Register() {
@@ -29,6 +30,10 @@ function Register() {
     }
 
     return (
+      <>
+        <Header>
+          <Link to="/sign-in" className="login__login-link">Войти</Link>
+        </Header>
         <div className="login">
         <p className="login__welcome">Регистрация</p>
         <form onSubmit={handleSubmit} className="login__form">
@@ -41,6 +46,7 @@ function Register() {
           <Link to="/sign-in" className="login__login-link">Войти</Link>
         </div>
         </div>
+      </>
     );
   }
   
