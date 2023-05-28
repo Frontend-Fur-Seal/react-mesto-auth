@@ -1,4 +1,4 @@
-function SignIn() {
+function Login() {
     return (
         <div className="login">
         <p className="login__welcome">Вход</p>
@@ -11,5 +11,5 @@ function SignIn() {
     );
   }
   
-  export default SignIn;
+  export default Login;
   

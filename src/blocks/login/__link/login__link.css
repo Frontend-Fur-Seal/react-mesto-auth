@@ -1,0 +1,11 @@
+.login__link{
+    min-width: 100%;
+    min-height: 50px;
+    margin-top: 186px;
+    font-size: 18px;
+}
+
+.login__link:hover{
+    cursor: pointer;
+    opacity: 0.85;
+}

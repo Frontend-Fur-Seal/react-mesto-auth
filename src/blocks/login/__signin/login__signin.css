@@ -1,0 +1,17 @@
+.login__signin{
+    display: flex;
+    flex-direction: row;
+    margin: 0;
+    align-items: center;
+    gap: 5px;
+}
+
+.login__signin > *{
+    margin: 15px auto 0;
+    text-decoration: none;
+    color: #fff;
+}
+
+.login__login-link:hover{
+  opacity: .6;
+}

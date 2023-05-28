@@ -10,11 +10,12 @@ import EditProfilePopup from "./EditProfilePopup.js";
 import AddPlacePopup from "./AddPlacePopup.js";
 import EditAvatarPopup from "./EditAvatarPopup.js";
 import ProtectedRouteElement from './ProtectedRoute.js';
-import SignIn from "./SignIn.js";
+import Login from "./Login.js";
+import Register from "./Register.js";
 
 const App = () => {
 
-  const [loggedIn, setLoggedIn] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(true);
 
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
   const [isEditAddPlacePopupOpen, setIsEditAddPlacePopupOpen] = useState(false);
@@ -124,9 +125,9 @@ const App = () => {
       <div className="App">
         <Header />
         <Routes>
-          <Route path="/" element={loggedIn ? <Navigate to="/main" replace /> : <Navigate to="/sign-in" replace />} />
-          <Route path="/sign-in" element={<SignIn />} />
-          <Route path="/main" element={<ProtectedRouteElement 
+          <Route path="/sign-in" element={<Login />} />
+          <Route path="/sign-up" element={<Register />} />
+          <Route path="/" element={<ProtectedRouteElement 
             element={Main} 
             loggedIn={loggedIn}
             onEditAvatar={handleEditAvatarClick}
@@ -137,6 +138,7 @@ const App = () => {
             onCardDelete={handleCardDelete}
             cards={cards}         
             />} />
+          <Route path="*" element={<Login />} />
         </Routes>
         <Footer />
         <EditProfilePopup
