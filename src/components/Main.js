@@ -12,7 +12,7 @@ function Main(props) {
     <>
     <Header>
           <p>{props.userData}</p>
-          <Link to="/sign-in" className="login__login-link">Выйти</Link>
+          <Link to="/sign-in" onClick={props.onSignOut} className="login__login-link">Выйти</Link>
     </Header>
     <main className="content">
       <section className="profile">

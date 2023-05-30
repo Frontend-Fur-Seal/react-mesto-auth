@@ -1,9 +1,8 @@
-import Header from "./Header.js";
 import Main from "./Main.js";
 import Footer from "./Footer.js";
 import ImagePopup from "./ImagePopup.js";
 import { useState, useEffect } from "react";
-import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
+import { Routes, Route, useNavigate } from 'react-router-dom';
 import api from "../utils/Api.js";
 import CurrentUserContext from "../contexts/CurrentUserContext.js";
 import EditProfilePopup from "./EditProfilePopup.js";
@@ -12,15 +11,63 @@ import EditAvatarPopup from "./EditAvatarPopup.js";
 import ProtectedRouteElement from './ProtectedRoute.js';
 import Login from "./Login.js";
 import Register from "./Register.js";
+import * as auth from './Auth.js';
 
 const App = () => {
 
-  const [loggedIn, setLoggedIn] = useState(false);
+  function checkUser (){
+    const jwt = localStorage.getItem('token');
+    if(jwt){
+      auth.checkToken(jwt)
+      .then((res) => {
+        confirmUser(res.data.email);
+      })
+      .catch(() => {
+        setLoggedIn(false);
+      })
+    }
+  }
+
+  useEffect(() => {
+    checkUser();
+  }, [])
+
+function onSignOut(){
+  localStorage.removeItem('token') 
+}
+
+function onLogin(token){
+  localStorage.setItem('token', token) 
+}
+
+function confirmUser(email){
+  setLoggedIn(true); 
+  navigate('/')
+  setUserData(email);
+}
+  const navigate = useNavigate();
+
+  const [loggedIn, setLoggedIn] = useState(null);
   const [userData, setUserData] = useState(null);
 
-  const handleLogin = (user) => {
-    setLoggedIn(true);  
-    setUserData(user);
+  const handleLogin = (email, password) => { 
+    auth.authorize(email, password)
+    .then((res) => {
+      onLogin(res.token)
+      confirmUser(email);
+    })
+    .catch((error) => (console.log(`Ошибка ${error}`)))
+    //Попап Вы НЕ успешно авторизовались, нармально сделай да
+  }
+
+  const handleRegister = (email, password) => {
+    auth.register(email, password)
+    .then(() => {
+    navigate("/")
+    //Попап Вы успешно зарегистрировались
+    })
+    .catch((error) => (console.log(`Ошибка ${error}`)))
+    //Попап Вы НЕ успешно зарегистрировались, нармально сделай да
   }
 
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
@@ -126,15 +173,15 @@ const App = () => {
   }
 
   return (
-  <BrowserRouter>
     <CurrentUserContext.Provider value={currentUser}>
       <div className="App">
         <Routes>
-          <Route path="/sign-in" element={<Login handleLogin={handleLogin} userData={userData} />} />
-          <Route path="/sign-up" element={<Register />} />
+          <Route path="/sign-in" element={<Login handleLogin={handleLogin} />} />
+          <Route path="/sign-up" element={<Register handleRegister={handleRegister} />} />
           <Route path="/" element={<ProtectedRouteElement 
             element={Main} 
             loggedIn={loggedIn}
+            onSignOut={onSignOut}
             onEditAvatar={handleEditAvatarClick}
             onAddPlace={handleAddPlaceClick}
             onEditProfile={handleEditProfileClick}
@@ -165,7 +212,6 @@ const App = () => {
         <ImagePopup card={SelectedCard} onClose={closeAllPopups} />
       </div>
     </CurrentUserContext.Provider>
-  </BrowserRouter>
   );
 };
 
