@@ -8,6 +8,7 @@ import CurrentUserContext from "../contexts/CurrentUserContext.js";
 import EditProfilePopup from "./EditProfilePopup.js";
 import AddPlacePopup from "./AddPlacePopup.js";
 import EditAvatarPopup from "./EditAvatarPopup.js";
+import Infotooltip from "./InfoTooltip.js";
 import ProtectedRouteElement from './ProtectedRoute.js';
 import Login from "./Login.js";
 import Register from "./Register.js";
@@ -15,7 +16,24 @@ import * as auth from './Auth.js';
 
 const App = () => {
 
-  function checkUser (){
+  const navigate = useNavigate();
+
+  const [loggedIn, setLoggedIn] = useState(null);
+  const [userData, setUserData] = useState(null);
+
+  const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
+  const [isEditAddPlacePopupOpen, setIsEditAddPlacePopupOpen] = useState(false);
+  const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
+
+  const [isInfotooltipOpenOk, setIsInfotooltipOpenOk] = useState(false);
+  const [isInfotooltipOpenError, setIsInfotooltipOpenError] = useState(false);
+
+  const [cards, setNewCards] = useState([]);
+  const [currentUser, setCurrentUser] = useState({});
+
+  const [SelectedCard, setSelectedCard] = useState({ name: "", link: "" });
+
+  useEffect(() => {
     const jwt = localStorage.getItem('token');
     if(jwt){
       auth.checkToken(jwt)
@@ -26,10 +44,6 @@ const App = () => {
         setLoggedIn(false);
       })
     }
-  }
-
-  useEffect(() => {
-    checkUser();
   }, [])
 
 function onSignOut(){
@@ -45,10 +59,6 @@ function confirmUser(email){
   navigate('/')
   setUserData(email);
 }
-  const navigate = useNavigate();
-
-  const [loggedIn, setLoggedIn] = useState(null);
-  const [userData, setUserData] = useState(null);
 
   const handleLogin = (email, password) => { 
     auth.authorize(email, password)
@@ -56,28 +66,23 @@ function confirmUser(email){
       onLogin(res.token)
       confirmUser(email);
     })
-    .catch((error) => (console.log(`Ошибка ${error}`)))
-    //Попап Вы НЕ успешно авторизовались, нармально сделай да
+    .catch((error) => {
+      handleInfotooltipOpenError();
+      (console.log(`Ошибка ${error}`))
+    })
   }
 
   const handleRegister = (email, password) => {
     auth.register(email, password)
     .then(() => {
-    navigate("/")
-    //Попап Вы успешно зарегистрировались
+    navigate("/sign-in")
+    handleInfotooltipOpenOk();
     })
-    .catch((error) => (console.log(`Ошибка ${error}`)))
-    //Попап Вы НЕ успешно зарегистрировались, нармально сделай да
+    .catch((error) => {
+      handleInfotooltipOpenError();
+      (console.log(`Ошибка ${error}`))
+    })
   }
-
-  const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
-  const [isEditAddPlacePopupOpen, setIsEditAddPlacePopupOpen] = useState(false);
-  const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
-
-  const [cards, setNewCards] = useState([]);
-  const [currentUser, setCurrentUser] = useState({});
-
-  const [SelectedCard, setSelectedCard] = useState({ name: "", link: "" });
 
   useEffect(() => {
     api
@@ -135,10 +140,20 @@ function confirmUser(email){
     setIsEditAvatarPopupOpen(!isEditAvatarPopupOpen);
   }
 
+  function handleInfotooltipOpenOk(){
+    setIsInfotooltipOpenOk(!isInfotooltipOpenOk)
+  }
+
+  function handleInfotooltipOpenError(){
+    setIsInfotooltipOpenError(!isInfotooltipOpenError)
+  }
+
   function closeAllPopups() {
     setIsEditProfilePopupOpen(false);
     setIsEditAddPlacePopupOpen(false);
     setIsEditAvatarPopupOpen(false);
+    setIsInfotooltipOpenOk(false);
+    setIsInfotooltipOpenError(false);
     setSelectedCard({ name: "", link: "" });
   }
 
@@ -170,6 +185,10 @@ function confirmUser(email){
         closeAllPopups();
       })
       .catch((err) => console.error(err));
+  }
+
+  function handleInfotooltip(title, back){
+
   }
 
   return (
@@ -210,6 +229,8 @@ function confirmUser(email){
           onUpdateAvatar={handleUpdateAvatar}
         />
         <ImagePopup card={SelectedCard} onClose={closeAllPopups} />
+        <Infotooltip isOpen={isInfotooltipOpenOk} onClose={closeAllPopups} resOk={true} />
+        <Infotooltip isOpen={isInfotooltipOpenError} onClose={closeAllPopups} resOk={false} />
       </div>
     </CurrentUserContext.Provider>
   );

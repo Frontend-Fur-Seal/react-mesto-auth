@@ -19,11 +19,15 @@
 @import url(./blocks/login/__link/login__link.css);
 @import url(./blocks/login/__signin/login__signin.css);
 @import url(./blocks/popup/popup.css);
+@import url(./blocks/popup/__res-ok/popup__res-ok.css);
+@import url(./blocks/popup/__res-error/popup__res-error.css);
 @import url(./blocks/popup/_full-img/popup_full-img.css);
 @import url(./blocks/popup/__container/popup__container.css);
 @import url(./blocks/popup/__container/_full-img/popup__container_full-img.css);
 @import url(./blocks/popup/__container/_delete-agree/popup__container_delete-agree.css);
+@import url(./blocks/popup/__container/_infotool/popup__container_infotool.css);
 @import url(./blocks/popup/__title/popup__title.css);
+@import url(./blocks/popup/__title/_infotool/popup__title_infotool.css);
 @import url(./blocks/popup/_opened/popup_opened.css);
 @import url(./blocks/popup/__content/popup__content.css);
 @import url(./blocks/popup/__submit/popup__submit.css);

@@ -1,0 +1,6 @@
+.popup__container_infotool{
+    align-items: center;
+    justify-content: space-between;
+    max-width: 430px;
+    padding: 60px 36px;
+}

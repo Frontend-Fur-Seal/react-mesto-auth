@@ -1,0 +1,7 @@
+.popup__res-ok{
+    width: 120px;
+    height: 120px;
+    background-image: url(../../../images/res-ok.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+}

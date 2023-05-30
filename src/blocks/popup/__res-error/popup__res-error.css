@@ -1,0 +1,7 @@
+.popup__res-error{
+        width: 120px;
+        height: 120px;
+        background-image: url(../../../images/res-error.png);
+        background-size: contain;
+        background-repeat: no-repeat;
+}
