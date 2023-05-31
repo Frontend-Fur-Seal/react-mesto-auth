@@ -31,8 +31,8 @@ function Register({ handleRegister }) {
         <div className="login">
         <p className="login__welcome">Регистрация</p>
         <form onSubmit={handleSubmit} className="login__form">
-          <input onChange={handleChange} autoComplete='on' className="login__input" required id="email" name="email" type="text" placeholder="Email" />
-          <input onChange={handleChange} autoComplete='off' className="login__input" required id="password" name="password" type="password" placeholder="Пароль" />
+          <input onChange={handleChange} value={formValue.email} autoComplete='on' className="login__input" required id="email" name="email" type="text" placeholder="Email" />
+          <input onChange={handleChange}  value={formValue.password} autoComplete='off' className="login__input" required id="password" name="password" type="password" placeholder="Пароль" />
           <button onSubmit={handleSubmit} type="submit" className="login__link">Зарегистрироваться</button>
         </form>
         <div className="login__signin">
