@@ -2,6 +2,7 @@ import * as auth from './Auth.js';
 import React, {useState} from 'react';
 import { Link } from 'react-router-dom';
 import Header from './Header.js';
+import AuthForm from './AuthForm.js';
 
 
 function Login({handleLogin}) {
@@ -31,12 +32,8 @@ function Login({handleLogin}) {
       <Link to="/sign-up" className="login__login-link">Регистрация</Link>
     </Header>
         <div className="login">
-        <p className="login__welcome">Вход</p>
-        <form onSubmit={handleSubmit} className="login__form">
-          <input onChange={handleChange} value={setFormValue.email} autoComplete='on' className="login__input" required id="email" name="email" type="text" placeholder="Email" />
-          <input onChange={handleChange} value={setFormValue.password} autoComplete='off' className="login__input" required id="password" name="password" type="password" placeholder="Пароль" />
-          <button onSubmit={handleSubmit} type="submit" className="login__link">Войти</button>
-        </form>
+          <p className="login__welcome">Вход</p>
+          <AuthForm handleSubmit={handleSubmit} handleChange={handleChange} formValue={formValue} />
         </div>
         </>
     );

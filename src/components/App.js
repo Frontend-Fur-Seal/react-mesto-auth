@@ -229,8 +229,8 @@ function confirmUser(email){
           onUpdateAvatar={handleUpdateAvatar}
         />
         <ImagePopup card={SelectedCard} onClose={closeAllPopups} />
-        <Infotooltip isOpen={isInfotooltipOpenOk} onClose={closeAllPopups} resOk={true} />
-        <Infotooltip isOpen={isInfotooltipOpenError} onClose={closeAllPopups} resOk={false} />
+        <Infotooltip name = {'infotool'} isOpen={isInfotooltipOpenOk} onClose={closeAllPopups} resOk={true} />
+        <Infotooltip name = {'infotool'} isOpen={isInfotooltipOpenError} onClose={closeAllPopups} resOk={false} />
       </div>
     </CurrentUserContext.Provider>
   );

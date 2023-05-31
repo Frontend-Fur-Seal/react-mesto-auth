@@ -1,14 +1,20 @@
+import Popup from "./Popup";
+
 function PopupWithForm({
   isOpen,
-  title,
   onClose,
+  name,
+  title,
   children,
   buttonText,
   handleSubmit,
 }) {
   return (
-    <section className={`popup ${isOpen ? "popup_opened" : ""}`}>
-      <div className="popup__container">
+    <Popup
+    isOpen={isOpen}
+    onClose={onClose}
+    name={name}
+    >
         <h2 className="popup__title">{title}</h2>
         <form className="popup__form" onSubmit={handleSubmit}>
           {children}
@@ -16,9 +22,7 @@ function PopupWithForm({
             {buttonText}
           </button>
         </form>
-        <button className="popup__close" type="reset" onClick={onClose} />
-      </div>
-    </section>
+    </Popup>
   );
 }
 
